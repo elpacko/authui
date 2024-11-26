@@ -2,6 +2,7 @@
 	import { browser } from '$app/environment';
 	import { Account, Client, ID } from 'appwrite';
 	import { onMount } from 'svelte';
+	import { t } from 'svelte-i18n';
 
 	export let isPreview = false;
 	export let getClient: () => Client;
@@ -62,7 +63,7 @@
 				<ul class="inline-links is-center is-with-sep u-margin-block-start-16">
 					<li class="inline-links-item">
 						<a href={isPreview ? undefined : '/'} type="button"
-							><span class="text">Try Again</span></a
+							><span class="text">{$t('general.try_again')} </span></a
 						>
 					</li>
 				</ul>

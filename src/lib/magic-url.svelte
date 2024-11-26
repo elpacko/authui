@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { Account, Client, ID, type Models } from 'appwrite';
+	import { t } from 'svelte-i18n';
 
 	export let allowMagicUrl: boolean = false;
 	export let allowEmailOtp: boolean = false;
@@ -73,7 +74,7 @@
 		<form on:submit|preventDefault={onSubmit} class="form" data-hs-cf-bound="true">
 			<ul class="form-list">
 				<li class="form-item">
-					<label class="label is-required" for="email">Email</label>
+					<label class="label is-required" for="email">{$t('general.email')}</label>
 					<div class="input-text-wrapper">
 						<input
 							bind:value={email}
@@ -97,7 +98,9 @@
 							<div class="loader" />
 						</button>
 					{:else}
-						<button class="c-branded-button button is-full-width" type="submit">Sign In</button>
+						<button class="c-branded-button button is-full-width" type="submit"
+							>{$t('general.signin')}</button
+						>
 					{/if}
 
 					{#if error}
@@ -112,7 +115,7 @@
 					<ul class="inline-links is-center is-with-sep u-margin-block-start-16">
 						<li class="inline-links-item">
 							<a href={isPreview ? undefined : '/'} type="button"
-								><span class="text">Other Methods</span></a
+								><span class="text">{$t('general.other_methods')}</span></a
 							>
 						</li>
 					</ul>
@@ -125,8 +128,8 @@
 				<section class="alert-sticky is-success" style="width: 100%;">
 					<div class="alert-sticky-image"><span class="icon-info" aria-hidden="true" /></div>
 					<div class="alert-sticky-content">
-						<h4 class="alert-sticky-title">Sign In Email Sent to {email}</h4>
-						<p>Check your email inbox to continue the login process.</p>
+						<h4 class="alert-sticky-title">{$t('form.magic.signin_sent')}</h4>
+						<p>{$t('form.magic.check_inbox')}</p>
 					</div>
 				</section>
 
@@ -138,7 +141,7 @@
 									sent = false;
 									email = '';
 								}}
-								type="button"><span class="text">Try Again</span></button
+								type="button"><span class="text">{$t('general.try_again')}</span></button
 							>
 						</li>
 					</ul>
@@ -150,8 +153,8 @@
 				<section class="alert-sticky is-success" style="width: 100%;">
 					<div class="alert-sticky-image"><span class="icon-info" aria-hidden="true" /></div>
 					<div class="alert-sticky-content">
-						<h4 class="alert-sticky-title">Sign In e-mail Sent to {email}</h4>
-						<p>Check your email inbox to continue the login process.</p>
+						<h4 class="alert-sticky-title">{$t('form.magic.signin_sent')}</h4>
+						<p>{$t('form.magic.check_inbox')}</p>
 					</div>
 				</section>
 
@@ -159,7 +162,7 @@
 					<form on:submit|preventDefault={onFinish}>
 						<ul class="form-list">
 							<li class="form-item">
-								<label class="label is-required" for="code">Code</label>
+								<label class="label is-required" for="code">{$t('general.code')}</label>
 								<div class="input-text-wrapper">
 									<input
 										bind:value={code}
@@ -184,7 +187,7 @@
 									</button>
 								{:else}
 									<button class="c-branded-button button is-full-width" type="submit"
-										>Sign In</button
+										>{$t('general.signin')}</button
 									>
 								{/if}
 
@@ -209,7 +212,7 @@
 									sent = false;
 									email = '';
 								}}
-								type="button"><span class="text">Try Again</span></button
+								type="button"><span class="text">{$t('general.try_again')}</span></button
 							>
 						</li>
 					</ul>

@@ -2,6 +2,7 @@
 	import { goto } from '$app/navigation';
 	import { Account, Client, ID } from 'appwrite';
 	import Password from './components/password.svelte';
+	import { t } from 'svelte-i18n';
 
 	export let getClient: () => Client;
 
@@ -47,11 +48,11 @@
 	<form on:submit|preventDefault={onSubmit} class="form" data-hs-cf-bound="true">
 		<ul class="form-list">
 			<li class="form-item">
-				<label class="label is-required" for="password">Password</label>
+				<label class="label is-required" for="password">{$t('general.password')}</label>
 				<Password bind:password />
 			</li>
 			<li class="form-item">
-				<label class="label is-required" for="passwordAgain">Password Again</label>
+				<label class="label is-required" for="passwordAgain">{$t('general.password_again')}</label>
 				<Password bind:password={passwordAgain} />
 			</li>
 			<li class="form-item">
@@ -65,7 +66,9 @@
 						<div class="loader" />
 					</button>
 				{:else}
-					<button class="c-branded-button button is-full-width" type="submit">Update</button>
+					<button class="c-branded-button button is-full-width" type="submit"
+						>{$t('general.update')}</button
+					>
 				{/if}
 
 				{#if error}

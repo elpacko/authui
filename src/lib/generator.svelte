@@ -1,10 +1,16 @@
 <script lang="ts">
-	import { PUBLIC_HOSTNAME, PUBLIC_HOSTNAME_PROTOCOL } from '$env/static/public';
+	import {
+		PUBLIC_HOSTNAME,
+		PUBLIC_HOSTNAME_PROTOCOL,
+		PUBLIC_DEFAULT_LOCALE
+	} from '$env/static/public';
 	import Layout from '$lib/layout.svelte';
 	import Form from './form.svelte';
+	import { t, locale, locales } from 'svelte-i18n';
 
 	export let adminUser: any | null;
 	export let adminPages: any[] = [];
+	locale.set(PUBLIC_DEFAULT_LOCALE);
 </script>
 
 <Layout {adminUser}>

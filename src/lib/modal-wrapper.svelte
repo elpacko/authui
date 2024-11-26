@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { PUBLIC_HOSTNAME, PUBLIC_HOSTNAME_PROTOCOL } from '$env/static/public';
+	import { t } from 'svelte-i18n';
 
 	import Modal from '$lib/modal.svelte';
 	import type { AppwritePage } from './appwrite';
@@ -55,13 +56,14 @@
 			<section class="alert-sticky is-info">
 				<div class="alert-sticky-image"><span class="icon-info" aria-hidden="true" /></div>
 				<div class="alert-sticky-content">
-					<h4 class="alert-sticky-title">Page Not Found</h4>
-					<p>This domain was not configured yet, and can still be claimed.</p>
+					<h4 class="alert-sticky-title">{$t('form.modal.page_not_found')}</h4>
+					<p>{$t('form.modal.domain_error')}</p>
 				</div>
 				<div class="alert-sticky-buttons u-flex">
 					<a
 						href={`${PUBLIC_HOSTNAME_PROTOCOL}://${PUBLIC_HOSTNAME}/`}
-						class="button is-text is-small"><span class="text">Create Page</span></a
+						class="button is-text is-small"
+						><span class="text">{$t('form.initial.create_page')}</span></a
 					>
 				</div>
 			</section>

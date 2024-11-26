@@ -5,6 +5,7 @@
 		PUBLIC_HOSTNAME_PROTOCOL
 	} from '$env/static/public';
 
+	import { t } from 'svelte-i18n';
 	import { ID, Permission, Role } from 'appwrite';
 	import { AppwriteDatabases, AppwriteStorage, type AppwritePage } from './appwrite';
 	import Modal from './modal.svelte';
@@ -187,8 +188,10 @@
 
 <form on:submit|preventDefault={onSubmit} class="card common-section">
 	{#if !created}
-		<h6 class="heading-level-7">{page === null ? 'Create Page' : 'Edit Page'}</h6>
-		<p class="u-margin-block-start-8">Customize and configure your auth page.</p>
+		<h6 class="heading-level-7">
+			{page === null ? $t('form.initial.create_page') : $t('form.initial.edit_page')}
+		</h6>
+		<p class="u-margin-block-start-8">{$t('form.initial.customize_page')}</p>
 		<div class="card-separator" style="padding-block-start: 1rem;" />
 	{/if}
 
@@ -199,11 +202,10 @@
 					<form class="modal-form" method="dialog">
 						{#if $accountStore === null}
 							<header class="modal-header">
-								<h4 class="modal-title heading-level-5">Sign In First</h4>
+								<h4 class="modal-title heading-level-5">{$t('form.initial.title')}</h4>
 							</header>
 							<div class="modal-content u-small">
-								Ownership of Auth UI page is important. Without ownership, you would not be able to
-								edit the page in future. Please sign in to continue.
+								{$t('form.initial.welcome')}
 							</div>
 							<div class="modal-footer">
 								<div class="u-flex u-main-end u-gap-16">
@@ -211,7 +213,7 @@
 										href={`${PUBLIC_HOSTNAME_PROTOCOL}://${PUBLIC_AUTHUI_PAGE_ID}.${PUBLIC_HOSTNAME}/`}
 										class="button is-secondary"
 									>
-										<span class="text">Sign In</span>
+										<span class="text">{$t('general.signin')}</span>
 									</a>
 								</div>
 							</div>
@@ -225,9 +227,9 @@
 
 		{#if !created}
 			<div class="grid-1-2-col-1 u-flex u-flex-vertical u-gap-24">
-				<h3 class="heading-level-7">1. Design</h3>
+				<h3 class="heading-level-7">1. {$t('form.initial.design')}</h3>
 				<div>
-					<h3 class="eyebrow-heading-3">Brand Color</h3>
+					<h3 class="eyebrow-heading-3">{$t('form.initial.brand_color')}</h3>
 
 					<div class="u-flex u-flex-wrap u-gap-12 u-margin-block-start-12">
 						<button
@@ -327,7 +329,7 @@
 					{#if brandColor.startsWith('#') || brandColor === ''}
 						<ul class="form-list u-margin-block-start-12">
 							<li class="form-item">
-								<label class="label" for="hexColor">HEX Color</label>
+								<label class="label" for="hexColor">{$t('form.initial.hex_color')}</label>
 								<div class="input-text-wrapper u-flex u-gap-2">
 									<input
 										bind:value={brandColor}
@@ -356,9 +358,9 @@
 										/>
 									</div>
 									<div class="choice-item-content">
-										<div class="choice-item-title">Contrast Color</div>
+										<div class="choice-item-title">{$t('form.initial.contrast_control')}</div>
 										<div class="choice-item-paragraph">
-											Toggle between light and dark contrast to your brand color.
+											{$t('form.initial.toggle_dark')}
 										</div>
 									</div></label
 								>
@@ -368,7 +370,7 @@
 				</div>
 
 				<div>
-					<h3 class="eyebrow-heading-3">Rounded Corners</h3>
+					<h3 class="eyebrow-heading-3">{$t('form.initial.rounded_corners')}</h3>
 
 					<div class="c-mini-radio u-flex u-flex-wrap u-gap-12 u-margin-block-start-12">
 						<button
@@ -430,8 +432,8 @@
 							/>
 						</div>
 						<div class="choice-item-content">
-							<div class="choice-item-title">Dark theme</div>
-							<div class="choice-item-paragraph">Apply dark background to auth page.</div>
+							<div class="choice-item-title">{$t('form.initial.dark_theme')}</div>
+							<div class="choice-item-paragraph">{$t('form.initial.dark_theme_description')}</div>
 						</div></label
 					>
 				</div>
@@ -458,13 +460,13 @@
 					{/if}
 				</div>
 
-				<h3 class="heading-level-7 u-margin-block-start-16">2. Configure</h3>
+				<h3 class="heading-level-7 u-margin-block-start-16">2. {$t('form.initial.configure')}</h3>
 
 				<div>
 					<div class="form u-width-full-line u-max-width-500">
 						<ul class="form-list">
 							<li class="form-item">
-								<label class="label" for="name">App Name</label>
+								<label class="label" for="name">{$t('form.initial.app_name')}</label>
 								<div class="input-text-wrapper">
 									<input
 										type="text"
@@ -476,7 +478,7 @@
 								</div>
 							</li>
 							<li class="form-item c-domain">
-								<label class="label is-required" for="domain">Domain</label>
+								<label class="label is-required" for="domain">{$t('form.initial.domain')}</label>
 								<div class="input-text-wrapper" style="--amount-of-buttons:2.2">
 									<input
 										required={true}
@@ -508,8 +510,8 @@
 								/>
 							</div>
 							<div class="choice-item-content">
-								<div class="choice-item-title">Sign In</div>
-								<div class="choice-item-paragraph">Login with email and password.</div>
+								<div class="choice-item-title">{$t('general.signin')}</div>
+								<div class="choice-item-paragraph">{$t('form.initial.login_with_password')}</div>
 							</div></label
 						>
 					</li>
@@ -526,8 +528,8 @@
 								/>
 							</div>
 							<div class="choice-item-content">
-								<div class="choice-item-title">Sign Up</div>
-								<div class="choice-item-paragraph">Register with email and password.</div>
+								<div class="choice-item-title">{$t('general.signup')}</div>
+								<div class="choice-item-paragraph">{$t('form.initial.register_with_email')}</div>
 							</div></label
 						>
 					</li>
@@ -544,9 +546,9 @@
 								/>
 							</div>
 							<div class="choice-item-content">
-								<div class="choice-item-title">Guest</div>
+								<div class="choice-item-title">{$t('general.guest')}</div>
 								<div class="choice-item-paragraph">
-									1-click sign up. User instantly gets account, but they can't sign into it later.
+									{$t('form.initial.one_click_signup')}
 								</div>
 							</div></label
 						>
@@ -563,10 +565,9 @@
 								/>
 							</div>
 							<div class="choice-item-content">
-								<div class="choice-item-title">Email (URL)</div>
+								<div class="choice-item-title">{$t('form.initial.email_url')}</div>
 								<div class="choice-item-paragraph">
-									Passwordless login. User recieves email and when they visit URL delivered by mail,
-									they get logged in.
+									{$t('form.initial.passwordless_login')}
 								</div>
 							</div></label
 						>
@@ -584,10 +585,9 @@
 								/>
 							</div>
 							<div class="choice-item-content">
-								<div class="choice-item-title">Email (Code)</div>
+								<div class="choice-item-title">{$t('form.initial.email_code')}</div>
 								<div class="choice-item-paragraph">
-									Passwordless login. User recieves email with 6 digit code. When entered, they get
-									logged in.
+									{$t('form.initial.email_code_description')}
 								</div>
 							</div></label
 						>
@@ -605,9 +605,9 @@
 								/>
 							</div>
 							<div class="choice-item-content">
-								<div class="choice-item-title">Phone</div>
+								<div class="choice-item-title">{$t('general.phone')}</div>
 								<div class="choice-item-paragraph">
-									SMS login. User recieves phone SMS with a code. To login, they enter 6 digit code.
+									{$t('form.initial.sms_login_description')}
 								</div>
 							</div></label
 						>
@@ -618,8 +618,7 @@
 							<div class="choice-item-content">
 								<div class="choice-item-title">OAuth</div>
 								<div class="choice-item-paragraph">
-									Login user using their existing social platform account. User will be redirected
-									to autorize.
+									{$t('form.initial.oauth_description')}
 								</div>
 
 								<div class="u-flex u-flex-vertical u-gap-8">
@@ -646,7 +645,7 @@
 					</li>
 				</ul>
 
-				<h3 class="heading-level-7 u-margin-block-start-16">3. Connect</h3>
+				<h3 class="heading-level-7 u-margin-block-start-16">3. {$t('form.initial.connect')}</h3>
 
 				<ul
 					class="grid-box"
@@ -685,7 +684,7 @@
 									class="u-margin-inline-auto u-opacity-20"
 									alt=""
 								/>
-								<p class="u-opacity-20">Coming soon</p>
+								<p class="u-opacity-20">{$t('general.coming_soon')}</p>
 							</div>
 						</label>
 					</li>
@@ -710,7 +709,7 @@
 									class="u-margin-inline-auto u-opacity-20"
 									alt=""
 								/>
-								<p class="u-opacity-20">Coming soon</p>
+								<p class="u-opacity-20">{$t('general.coming_soon')}</p>
 							</div>
 						</label>
 					</li>
@@ -729,7 +728,7 @@
 									class="u-margin-inline-auto u-opacity-20"
 									alt=""
 								/>
-								<p class="u-opacity-20">Coming soon</p>
+								<p class="u-opacity-20">{$t('general.coming_soon')}</p>
 							</div>
 						</label>
 					</li>
@@ -766,12 +765,14 @@
 					</ul>
 				</div>
 
-				<h3 class="heading-level-7 u-margin-block-start-16">4. Redirect</h3>
+				<h3 class="heading-level-7 u-margin-block-start-16">4. {$t('form.initial.redirect')}</h3>
 
 				<div class="form u-width-full-line u-max-width-500">
 					<ul class="form-list">
 						<li class="form-item">
-							<label class="label is-required" for="successUrl">Success URL</label>
+							<label class="label is-required" for="successUrl"
+								>{$t('form.initial.success_url')}</label
+							>
 							<div class="input-text-wrapper">
 								<input
 									required={true}
@@ -784,7 +785,9 @@
 							</div>
 						</li>
 						<li class="form-item">
-							<label class="label is-required" for="failureUrl">Failure URL</label>
+							<label class="label is-required" for="failureUrl"
+								>{$t('form.initial.failure_url')}</label
+							>
 							<div class="input-text-wrapper">
 								<input
 									required={true}
@@ -804,7 +807,7 @@
 				<div class="form u-width-full-line u-max-width-500">
 					<ul class="form-list">
 						<li class="form-item">
-							<label class="label" for="termsOfService">Terms of Service</label>
+							<label class="label" for="termsOfService">{$t('general.terms')}</label>
 							<div class="input-text-wrapper">
 								<input
 									type="text"
@@ -816,7 +819,7 @@
 							</div>
 						</li>
 						<li class="form-item">
-							<label class="label" for="privacyPolicy">Privacy Policy</label>
+							<label class="label" for="privacyPolicy">{$t('general.privacy_policy')}</label>
 							<div class="input-text-wrapper">
 								<input
 									type="text"
@@ -836,11 +839,15 @@
 					{:else}
 						<div class="u-flex u-gap-4">
 							<button type="submit" class="button">
-								<span class="text">{page === null ? 'Create Auth Page' : 'Save Page'}</span></button
+								<span class="text"
+									>{page === null
+										? $t('form.initial.create_auth_page')
+										: $t('form.initial.save_page')}</span
+								></button
 							>
 							{#if page !== null}
 								<button on:click={onDelete} type="button" class="button is-text">
-									<span class="text">Delete Page</span></button
+									<span class="text">{$t('form.initial.delete_page')}</span></button
 								>
 							{/if}
 						</div>
@@ -851,7 +858,7 @@
 							<div class="alert-grid">
 								<span class="icon-exclamation-circle" aria-hidden="true" />
 								<div class="alert-content">
-									<h6 class="alert-title">Something went wrong!</h6>
+									<h6 class="alert-title">{$t('general.something_went_wrong')}</h6>
 									<p class="alert-message">
 										{error}
 									</p>
@@ -863,24 +870,26 @@
 			</div>
 		{:else}
 			<div class="grid-1-2-col-1 u-flex u-flex-vertical u-gap-24">
-				<h1 class="heading-level-4">Auth Page Ready 🎉</h1>
-				<h3 class="heading-level-7">Next steps</h3>
+				<h1 class="heading-level-4">{$t('form.initial.auth_page_ready')} 🎉</h1>
+				<h3 class="heading-level-7">{$t('form.initial.next_steps')}</h3>
 
 				<ul class="list">
 					<li class="list-item">
 						<span class="icon-check" aria-hidden="true" />
 						<span class="text"
-							>Add <code class="inline-code">{domain}.{PUBLIC_HOSTNAME}</code> as web platform in your
-							Appwrite project</span
+							>{$t('form.initial.add')}
+							<code class="inline-code">{domain}.{PUBLIC_HOSTNAME}</code>{$t(
+								'form.initial.add_as_web'
+							)}</span
 						>
 					</li>
 
 					<li class="list-item">
 						<span class="icon-check" aria-hidden="true" />
 						<span class="text"
-							>In your app, redirect "Sign In / Sign Up" button to <code class="inline-code"
+							>{$t('form.initial.in_your_app_redirect')}<code class="inline-code"
 								>{PUBLIC_HOSTNAME_PROTOCOL}://{domain}.{PUBLIC_HOSTNAME}/</code
-							>. You can also use this URL instead of "Sign Out" button.</span
+							>{$t('form.initial.you_can_use_url_signout')}</span
 						>
 					</li>
 
@@ -888,34 +897,40 @@
 						<span class="icon-check" aria-hidden="true" />
 
 						<div>
-							<span class="text"
-								>Make sure following sign-in methods are enabled on your project in your Appwrite
-								Console under User settings:</span
-							>
+							<span class="text">{$t('form.initial.make_sure_signin_methods_in_appwrite')}</span>
 
 							<ol class="numeric-list u-margin-block-start-12">
 								<li class="numeric-list-item">
-									<span class="text"><p class="text u-margin-block-start-8">Email/Password</p></span
+									<span class="text"
+										><p class="text u-margin-block-start-8">{$t('general.email_password')}</p></span
 									>
 								</li>
 								{#if allowGuest}
 									<li class="numeric-list-item">
-										<span class="text"><p class="text u-margin-block-start-8">Anonymous</p></span>
+										<span class="text"
+											><p class="text u-margin-block-start-8">{$t('general.anonymous')}</p></span
+										>
 									</li>
 								{/if}
 								{#if allowMagicUrl}
 									<li class="numeric-list-item">
-										<span class="text"><p class="text u-margin-block-start-8">Magic URL</p></span>
+										<span class="text"
+											><p class="text u-margin-block-start-8">{$t('general.magic_url')}</p></span
+										>
 									</li>
 								{/if}
 								{#if allowEmailOtp}
 									<li class="numeric-list-item">
-										<span class="text"><p class="text u-margin-block-start-8">Email OTP</p></span>
+										<span class="text"
+											><p class="text u-margin-block-start-8">{$t('general.email_otp')}</p></span
+										>
 									</li>
 								{/if}
 								{#if allowPhone}
 									<li class="numeric-list-item">
-										<span class="text"><p class="text u-margin-block-start-8">Phone</p></span>
+										<span class="text"
+											><p class="text u-margin-block-start-8">{$t('general.phone')}</p></span
+										>
 									</li>
 								{/if}
 							</ol>
@@ -926,10 +941,7 @@
 						<li class="list-item">
 							<span class="icon-check" aria-hidden="true" />
 							<div>
-								<span class="text"
-									>Make sure to configure following OAuth providers in Appwrite Console under Users
-									settings:</span
-								>
+								<span class="text">{$t('form.initial.make_sure_configure_oauth')}</span>
 
 								<ol class="numeric-list u-margin-block-start-12">
 									{#if allowGoogle}
@@ -959,12 +971,11 @@
 						<li class="list-item">
 							<span class="icon-check" aria-hidden="true" />
 							<span class="text"
-								>For OAuth to work properly on Safari, make sure your Appwrite endpoint is subdomain
-								of your app domain. For example, Appwrite at <code class="inline-code"
-									>appwrite.myapp.com</code
+								>{$t('form.initial.oauth_safari')}<code class="inline-code">appwrite.myapp.com</code
 								>
-								and your app at <code class="inline-code">myapp.com</code>. You can achieve that in
-								Appwrite Console under Custom Domains in project settings.</span
+								{$t('form.initial.and_your_app')}<code class="inline-code">myapp.com</code>{$t(
+									'form.initial.you_can_achieve_console'
+								)}</span
 							>
 						</li>
 					{/if}
@@ -983,7 +994,7 @@
 									disabled={previewTab === 'signIn'}
 									class="secondary-tabs-button"
 								>
-									<span class="text">Sign In</span>
+									<span class="text">{$t('general.signin')}</span>
 								</button>
 							</li>
 
@@ -994,7 +1005,7 @@
 										disabled={previewTab === 'signUp'}
 										class="secondary-tabs-button"
 									>
-										<span class="text">Sign Up</span>
+										<span class="text">{$t('general.signup')}</span>
 									</button>
 								</li>
 							{/if}
@@ -1005,7 +1016,7 @@
 									disabled={previewTab === 'forgotPassword'}
 									class="secondary-tabs-button"
 								>
-									<span class="text">Password Recovery</span>
+									<span class="text">{$t('general.password_recovery')}</span>
 								</button>
 							</li>
 						{:else}
@@ -1077,7 +1088,7 @@
 										on:click={() => {
 											navigator.clipboard.writeText(`
 									  <a href="${PUBLIC_HOSTNAME_PROTOCOL}://${domain}.${PUBLIC_HOSTNAME}/">
-										  Sign In
+										  {$t('general.signin')}
 									  </a>
 									  `);
 											copyOverride = 'COPIED';
@@ -1091,7 +1102,7 @@
 										{#if copyOverride}
 											<span style="font-weight: bold; font-size: 12px;">{copyOverride}</span>
 										{:else}
-											<span class="text">Copy HTML</span>
+											<span class="text">{$t('general.copy')} HTML</span>
 										{/if}
 									</button>
 								</div>
@@ -1100,7 +1111,7 @@
 								<div class="grid-code-line-number" />
 								<pre>&lt;a href="{PUBLIC_HOSTNAME_PROTOCOL}://{domain}.{PUBLIC_HOSTNAME}/"&gt;</pre>
 								<div class="grid-code-line-number" />
-								<pre>    Sign In</pre>
+								<pre>    {$t('general.signin')}</pre>
 								<div class="grid-code-line-number" />
 								<pre>&lt;/a&gt;	</pre>
 							</code>
@@ -1125,7 +1136,7 @@
 										{#if copyOverride}
 											<span style="font-weight: bold; font-size: 12px;">{copyOverride}</span>
 										{:else}
-											<span class="text">Copy URL</span>
+											<span class="text">{$t('general.copy')} URL</span>
 										{/if}
 									</button>
 								</div>

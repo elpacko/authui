@@ -2,10 +2,12 @@
 	import {
 		PUBLIC_AUTHUI_PAGE_ID,
 		PUBLIC_HOSTNAME,
-		PUBLIC_HOSTNAME_PROTOCOL
+		PUBLIC_HOSTNAME_PROTOCOL,
+		PUBLIC_DISPLAY_LOCALE_SWITCHER
 	} from '$env/static/public';
 
 	import { accountStore } from './stores';
+	import { t, locale, locales } from 'svelte-i18n';
 
 	export let isSubpage = false;
 	export let adminUser: any | null;
@@ -18,6 +20,18 @@
 		<a class="logo eyebrow-heading-2" href="/"> Auth UI </a>
 		<div class="main-header-end u-margin-inline-end-16">
 			<ul class="buttons-list is-with-padding">
+				{#if PUBLIC_DISPLAY_LOCALE_SWITCHER == 'True'}
+					<li>
+						<p>
+							<select bind:value={$locale}>
+								{#each $locales as l}
+									<option value={l}>{l}</option>
+								{/each}
+							</select>
+						</p>
+					</li>
+				{/if}
+
 				<li class="buttons-list-item">
 					<a href="https://github.com/Meldiron/authui" target="_blank" class="button is-secondary"
 						><span aria-hidden="true" class="icon-star" /><span class="text">Star on GitHub</span
@@ -51,7 +65,7 @@
 					<code class="u-un-break-text" />
 				</div>
 				<p class="body-text-1 u-normal u-margin-block-start-8">
-					Fully customizable login flow for your applications. Get started in minutes, not hours!
+					{$t('app.description')}
 				</p>
 			</div>
 		</div>

@@ -21,5 +21,5 @@
 {#if isSubdomain}
 	<ModalWrapper user={data.user} page={data.page} action="signIn" />
 {:else}
-	<Generator adminUser={data.adminUser} adminPages={data.adminPages} />
+	<Generator adminUser={data.adminUser} adminPages={data.adminPages ?? []} />
 {/if}

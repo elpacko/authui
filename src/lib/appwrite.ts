@@ -26,7 +26,7 @@ export type AppwritePage = {
 
 export const AppwriteClient = new Client()
 	.setEndpoint('https://appwrite.authui.site/v1')
-	.setProject('authUi');
+	.setProject('myproject');
 
 export const AppwriteDatabases = new Databases(AppwriteClient);
 export const AppwriteAccount = new Account(AppwriteClient);

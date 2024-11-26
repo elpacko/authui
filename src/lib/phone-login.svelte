@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Account, Client, ID } from 'appwrite';
-
+	import { t } from 'svelte-i18n';
 	export let isPreview = false;
 	export let getClient: () => Client;
 	export let successUrl: string = '';
@@ -83,7 +83,9 @@
 							<div class="loader" />
 						</button>
 					{:else}
-						<button class="c-branded-button button is-full-width" type="submit">Sign In</button>
+						<button class="c-branded-button button is-full-width" type="submit"
+							>{$t('general.signin')}</button
+						>
 					{/if}
 
 					{#if error}
@@ -143,7 +145,9 @@
 									<div class="loader" />
 								</button>
 							{:else}
-								<button class="c-branded-button button is-full-width" type="submit">Sign In</button>
+								<button class="c-branded-button button is-full-width" type="submit"
+									>{$t('general.signin')}</button
+								>
 							{/if}
 
 							{#if error}
@@ -167,7 +171,7 @@
 								sent = false;
 								phone = '';
 							}}
-							type="button"><span class="text">Try Again</span></button
+							type="button"><span class="text">{$t('general.try_again')}</span></button
 						>
 					</li>
 				</ul>

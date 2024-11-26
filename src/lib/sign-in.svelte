@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { Account, Client } from 'appwrite';
+
+	import { t } from 'svelte-i18n';
 	import Password from './components/password.svelte';
 
 	export let isPreview = false;
@@ -75,7 +77,7 @@
 
 <li class="form-item u-flex u-flex-vertical u-gap-8">
 	{#if allowGoogle || allowGitHub || allowFacebook || allowTwitter}
-		<span class="eyebrow-heading-3" style="margin-bottom: 0.3rem;">Social Login</span>
+		<span class="eyebrow-heading-3" style="margin-bottom: 0.3rem;">{$t('form.signin.social')}</span>
 	{/if}
 
 	{#if allowGoogle}
@@ -85,7 +87,7 @@
 			class="button is-full-width"
 			type="button"
 			><span class="icon-google" aria-hidden="true" />
-			<span class="text">Sign in with Google</span></button
+			<span class="text">{$t('general.signin_with')} Google</span></button
 		>
 	{/if}
 
@@ -96,7 +98,7 @@
 			class="button is-full-width"
 			type="button"
 			><span class="icon-github" aria-hidden="true" />
-			<span class="text">Sign in with GitHub</span></button
+			<span class="text">{$t('general.signin_with')} GitHub</span></button
 		>
 	{/if}
 
@@ -107,7 +109,7 @@
 			class="button is-full-width"
 			type="button"
 			><span class="icon-twitter" aria-hidden="true" />
-			<span class="text">Sign in with Twitter</span></button
+			<span class="text">{$t('general.signin_with')} Twitter</span></button
 		>
 	{/if}
 
@@ -118,7 +120,7 @@
 			type="button"
 			on:click={() => loginOAuth('facebook')}
 			><span class="icon-facebook" aria-hidden="true" />
-			<span class="text">Sign in with Facebook</span></button
+			<span class="text">{$t('general.signin_with')} Facebook</span></button
 		>
 	{/if}
 
@@ -131,7 +133,7 @@
 	<form on:submit|preventDefault={loginCredentials} class="form" data-hs-cf-bound="true">
 		<ul class="form-list">
 			<li class="form-item">
-				<label class="label is-required" for="email">Email</label>
+				<label class="label is-required" for="email">{$t('general.email')}</label>
 				<div class="input-text-wrapper">
 					<input
 						bind:value={email}
@@ -145,7 +147,7 @@
 				</div>
 			</li>
 			<li class="form-item">
-				<label class="label is-required" for="password">Password</label>
+				<label class="label is-required" for="password">{$t('general.password')}</label>
 				<Password bind:password />
 			</li>
 			<li class="form-item">
@@ -159,7 +161,9 @@
 						<div class="loader" />
 					</button>
 				{:else}
-					<button class="c-branded-button button is-full-width" type="submit">Sign in</button>
+					<button class="c-branded-button button is-full-width" type="submit"
+						>{$t('general.signin')}</button
+					>
 				{/if}
 
 				{#if credentialsError}
@@ -174,13 +178,13 @@
 				<ul class="inline-links is-center is-with-sep u-margin-block-start-16">
 					<li class="inline-links-item">
 						<a href={isPreview ? undefined : '/forgot-password'} type="button"
-							><span class="text">Forgot Password?</span></a
+							><span class="text">{$t('general.forgot_password')}</span></a
 						>
 					</li>
 					{#if allowSignUp}
 						<li class="inline-links-item">
 							<a href={isPreview ? undefined : '/sign-up'} type="button"
-								><span class="text">Sign Up</span></a
+								><span class="text">{$t('general.signup')}</span></a
 							>
 						</li>
 					{/if}
@@ -194,7 +198,9 @@
 	{/if}
 
 	{#if allowMagicUrl || allowEmailOtp || allowPhone}
-		<span class="eyebrow-heading-3" style="margin-bottom: 0.3rem;">Passwordless Login</span>
+		<span class="eyebrow-heading-3" style="margin-bottom: 0.3rem;"
+			>{$t('form.signin.passwordless_login')}</span
+		>
 	{/if}
 
 	{#if allowMagicUrl || allowEmailOtp}
@@ -203,7 +209,7 @@
 			class="button is-secondary is-full-width"
 			type="button"
 			><span class="icon-mail" aria-hidden="true" />
-			<span class="text">Sign in with Email</span></a
+			<span class="text">{$t('general.signin_email')}</span></a
 		>
 	{/if}
 
@@ -213,13 +219,13 @@
 			class="button is-secondary is-full-width"
 			type="button"
 			><span class="icon-phone" aria-hidden="true" />
-			<span class="text">Sign in with SMS</span></a
+			<span class="text">{$t('general.signin_sms')}</span></a
 		>
 	{/if}
 
 	{#if allowGuest}
 		<span class="eyebrow-heading-3" style="margin-bottom: 0.3rem; margin-top: 1rem;"
-			>Limited account</span
+			>{$t('form.signin.limited')}</span
 		>
 
 		{#if isGuestLoading}
@@ -237,7 +243,7 @@
 				class="is-border-dashed button is-text is-full-width"
 				type="button"
 				><span class="icon-anonymous" aria-hidden="true" />
-				<span class="text">Continue as Guest</span></button
+				<span class="text">{$t('form.signin.guest')}</span></button
 			>
 		{/if}
 

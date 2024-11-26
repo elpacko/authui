@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { Account, Client, ID } from 'appwrite';
+	import { t } from 'svelte-i18n';
 	import Password from './components/password.svelte';
 
 	export let isPreview = false;
@@ -57,12 +58,12 @@
 				</div>
 			</li>
 			<li class="form-item">
-				<label class="label is-required" for="email">Email</label>
+				<label class="label is-required" for="email">{$t('general.email')}</label>
 				<div class="input-text-wrapper">
 					<input
 						bind:value={email}
 						id="email"
-						placeholder="Email"
+						placeholder={$t('general.email')}
 						required={true}
 						type="email"
 						class="input-text"
@@ -71,11 +72,11 @@
 				</div>
 			</li>
 			<li class="form-item">
-				<label class="label is-required" for="password">Password</label>
+				<label class="label is-required" for="password">{$t('general.password')}</label>
 				<Password bind:password />
 			</li>
 			<li class="form-item">
-				<label class="label is-required" for="passwordAgain">Password Again</label>
+				<label class="label is-required" for="passwordAgain">{$t('general.password_again')}</label>
 				<Password bind:password={passwordAgain} />
 			</li>
 			<li class="form-item">
@@ -89,7 +90,9 @@
 						<div class="loader" />
 					</button>
 				{:else}
-					<button class="c-branded-button button is-full-width" type="submit">Sign Up</button>
+					<button class="c-branded-button button is-full-width" type="submit"
+						>{$t('general.signup')}</button
+					>
 				{/if}
 
 				{#if error}
@@ -104,11 +107,12 @@
 				<ul class="inline-links is-center is-with-sep u-margin-block-start-16">
 					<li class="inline-links-item">
 						<a href={isPreview ? undefined : '/forgot-password'} type="button"
-							><span class="text">Forgot Password?</span></a
+							><span class="text">{$t('general.forgot_password')}</span></a
 						>
 					</li>
 					<li class="inline-links-item">
-						<a href={isPreview ? undefined : '/'} type="button"><span class="text">Sign In</span></a
+						<a href={isPreview ? undefined : '/'} type="button"
+							><span class="text">{$t('general.signin')}</span></a
 						>
 					</li>
 				</ul>

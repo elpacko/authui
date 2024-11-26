@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Account, Client, ID } from 'appwrite';
-
+	import { t } from 'svelte-i18n';
 	export let allowSignUp = true;
 	export let isPreview = false;
 	export let getClient: () => Client;
@@ -39,7 +39,7 @@
 		<form on:submit|preventDefault={onSubmit} class="form" data-hs-cf-bound="true">
 			<ul class="form-list">
 				<li class="form-item">
-					<label class="label is-required" for="email">Email</label>
+					<label class="label is-required" for="email">{$t('general.email')}</label>
 					<div class="input-text-wrapper">
 						<input
 							bind:value={email}
@@ -63,7 +63,9 @@
 							<div class="loader" />
 						</button>
 					{:else}
-						<button class="c-branded-button button is-full-width" type="submit">Recover</button>
+						<button class="c-branded-button button is-full-width" type="submit"
+							>{$t('general.recover')}</button
+						>
 					{/if}
 
 					{#if error}
@@ -79,13 +81,13 @@
 						{#if allowSignUp}
 							<li class="inline-links-item">
 								<a href={isPreview ? undefined : '/sign-up'} type="button"
-									><span class="text">Sign Up</span></a
+									><span class="text">{$t('general.signup')}</span></a
 								>
 							</li>
 						{/if}
 						<li class="inline-links-item">
 							<a href={isPreview ? undefined : '/'} type="button"
-								><span class="text">Sign In</span></a
+								><span class="text">{$t('general.signin')}</span></a
 							>
 						</li>
 					</ul>
@@ -97,8 +99,8 @@
 			<section class="alert-sticky is-success" style="width: 100%;">
 				<div class="alert-sticky-image"><span class="icon-info" aria-hidden="true" /></div>
 				<div class="alert-sticky-content">
-					<h4 class="alert-sticky-title">Recovery Email Sent to {email}</h4>
-					<p>Check your email inbox to continue the password recovery.</p>
+					<h4 class="alert-sticky-title">{$t('form.forgot.recovery_email')}</h4>
+					<p>{$t('form.forgot.check_inbox')}</p>
 				</div>
 			</section>
 
@@ -106,7 +108,7 @@
 				<ul class="inline-links is-center is-with-sep u-margin-block-start-16">
 					<li class="inline-links-item">
 						<button on:click={() => (sent = false)} type="button"
-							><span class="text">Try Again</span></button
+							><span class="text">{$t('form.forgot.try_again')}</span></button
 						>
 					</li>
 				</ul>

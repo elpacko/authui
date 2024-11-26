@@ -2,6 +2,7 @@
 	import { browser } from '$app/environment';
 	import { Account, Client, type Models } from 'appwrite';
 	import { AppwriteService } from './appwrite';
+	import { t } from 'svelte-i18n';
 	import ForgotPasswordFinish from './forgot-password-finish.svelte';
 	import ForgotPassword from './forgot-password.svelte';
 	import MagicUrlFinish from './magic-url-finish.svelte';
@@ -115,15 +116,15 @@
 
 				<h1 class="u-text-center u-margin-block-start-24 heading-level-3 u-margin-block-start-auto">
 					{#if action === 'signIn'}
-						Sign in {name ? `to ${name}` : ''}
+						{$t('general.signin')} {name ? $t('modal.to') : ''}
 					{:else if action === 'signUp'}
-						Sign Up
+						{$t('general.signup')}
 					{:else if action === 'magicUrl' || action === 'magicUrlFinish'}
-						Sign in with Email
+						{$t('general.signin_email')}
 					{:else if action === 'phoneLogin'}
-						Sign in with SMS
+						{$t('general.signin_sms')}
 					{:else if action === 'forgotPassword' || action === 'forgotPasswordFinish'}
-						Password Recovery
+						{$t('modal.password_recovery')}
 					{/if}
 				</h1>
 				<div class="u-margin-block-start-24">
@@ -168,16 +169,18 @@
 			style="color: hsl(var(--color-neutral-70));"
 			class="u-x-small u-margin-block-start-12 u-text-center"
 		>
-			By joining, you agree to our <a
+			{$t('modal.agree_by_joining')}
+			<a
 				class="u-bold"
 				href={isPreview
 					? undefined
 					: termsOfService
 					? termsOfService
 					: 'https://appwrite.io/policy/terms'}
-				target="_blank">Terms of Service</a
-			>
-			and
+				target="_blank"
+				>{$t('modal.terms')}
+			</a>
+			{$t('general.and')}
 			<a
 				class="u-bold"
 				href={isPreview
@@ -185,8 +188,9 @@
 					: privacyPolicy
 					? privacyPolicy
 					: 'https://appwrite.io/policy/privacy'}
-				target="_blank">Privacy Policy</a
-			>
+				target="_blank"
+				>{$t('modal.privacy_policy')}
+			</a>
 		</p>
 	{:else}
 		<section class="card c-border-radius" style="width: 100%;">
@@ -200,12 +204,11 @@
 					/>
 				</div>
 				<h1 class="heading-level-3 u-margin-block-start-auto u-margin-block-start-24 u-text-center">
-					Welcome
+					{$t('general.welcome')}
 				</h1>
 				<p class="u-text-center">
-					You are already signed in as <span
-						class="u-bold"
-						style={`${darkTheme ? 'color: white;' : 'color: black;'}`}
+					{$t('modal.already_signed_in')}
+					<span class="u-bold" style={`${darkTheme ? 'color: white;' : 'color: black;'}`}
 						>{currentUser.name
 							? currentUser.name
 							: currentUser.email
@@ -224,7 +227,7 @@
 										<li class="form-item">
 											<a href={isPreview ? undefined : successUrl}>
 												<button class="c-branded-button button is-full-width" type="submit"
-													>Back to Website</button
+													>{$t('modal.back_website')}</button
 												></a
 											>
 
@@ -245,7 +248,7 @@
 												<button
 													class="button is-secondary is-full-width"
 													type="button"
-													on:click={signOut}>Sign Out</button
+													on:click={signOut}>{$t('general.signout')}</button
 												>
 											{/if}
 
